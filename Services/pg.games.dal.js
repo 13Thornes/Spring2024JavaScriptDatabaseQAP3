@@ -66,6 +66,21 @@ var putGame = function(id, gname, developer) {
   };
 
 
+  var patchGame = function(id, gname, developer) {
+    if(DEBUG) console.log("games.pg.dal.patchGame()");
+    return new Promise(function(resolve, reject) {
+      const sql = "UPDATE public.game SET game_name=$2, developer=$3 WHERE game_id=$1;";
+      dal.query(sql, [id, gname, developer], (err, result) => {
+        if (err) {
+            reject(err);
+          } else {
+            resolve(result.rows);
+          }
+      }); 
+    });
+  };
+
+
   var deleteGame = function(id) {
     if(DEBUG) console.log("gamess.pg.dal.deleteGame()");
     return new Promise(function(resolve, reject) {
@@ -87,5 +102,6 @@ var putGame = function(id, gname, developer) {
     getGameByGameId,
     // addGame,
     putGame,
-    deleteGame
+    deleteGame,
+    patchGame
   }
