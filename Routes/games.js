@@ -39,6 +39,17 @@ router.get('/:id', async (req, res) => {
 //     } 
 // });
 
+router.put('/:id', async (req, res) => {
+    if(DEBUG) console.log('games.PUT: ' + req.params.id);
+    try {
+        await gamesDal.putGame(req.params.id, req.body.gameName, req.body.developer);
+        res.redirect('/games/');
+    } catch {
+        // log this error to an error log file.
+        res.render('503');
+    }
+});
+
 
 
 

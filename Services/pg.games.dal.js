@@ -51,8 +51,24 @@ var getGames= function() {
 //   };
 
 
+var putGame = function(id, gname, developer) {
+    if(DEBUG) console.log("games.pg.dal.putGame()");
+    return new Promise(function(resolve, reject) {
+      const sql = "UPDATE public.game SET game_name=$2, developer=$3 WHERE actor_id=$1;";
+      dal.query(sql, [id, gname, developer], (err, result) => {
+        if (err) {
+            reject(err);
+          } else {
+            resolve(result.rows);
+          }
+      }); 
+    });
+  };
+
+
   module.exports = {
     getGames,
     getGameByGameId,
-    addGame
+    // addGame,
+    putGame
   }
