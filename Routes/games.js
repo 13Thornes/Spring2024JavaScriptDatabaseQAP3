@@ -28,6 +28,18 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+// router.post('/', async (req, res) => {
+//     if(DEBUG) console.log("games.POST");
+//     try {
+//         await gamesDal.addGame(req.body.game_id, req.body.game_name, req.body.developer );
+//         res.redirect('/games/');
+//     } catch {
+//         // log this error to an error log file.
+//         res.render('503');
+//     } 
+// });
+
+
 
 
 module.exports = router
