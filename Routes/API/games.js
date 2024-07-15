@@ -53,4 +53,19 @@ router.get('/:id', async (req, res) => {
 //     } 
 // });
 
+
+
+router.put('/:id', async (req, res) => {
+    if(DEBUG) console.log('ROUTE: /api/gamess PUT ' + req.params.id);
+    try {
+        await actorsDal.putGame(req.params.id, req.body.gameName, req.body.developer);
+        res.statusCode = 200;
+        res.json({message: "OK", status: 200});
+    } catch {
+        // log this error to an error log file.
+        res.statusCode = 503;
+        res.json({message: "Service Unavailable", status: 503});
+    }
+});
+
 module.exports = router;
