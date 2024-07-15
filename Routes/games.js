@@ -33,7 +33,15 @@ router.get('/:id/replace', async (req, res) => {
     res.render('gamePut.ejs', {gameName: req.query.gameName, developer: req.query.developer, theId: req.params.id});
 });
 
+router.get('/:id/edit', async (req, res) => {
+    if(DEBUG) console.log('game.Edit : ' + req.params.id);
+    res.render('actorPatch.ejs', {gameName: req.query.gameName, developer: req.query.developer, theId: req.params.id});
+});
 
+router.get('/:id/delete', async (req, res) => {
+    if(DEBUG) console.log('game.Delete : ' + req.params.id);
+    res.render('gameDelete.ejs', {gameName: req.query.gameName, developer: req.query.developer, theId: req.params.id});
+});
 
 
 // router.post('/', async (req, res) => {
