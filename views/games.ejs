@@ -1,0 +1,29 @@
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+    <body>
+        <%- include('./partials/nav.ejs') %>
+        <div class="games content">
+            <form action="/games" method="POST">
+                <b>Games: </b></br> 
+            <% if (theGames.length > 0) { %>
+                <% theGames.forEach(game => { %>
+                    <b><%= game.game_name %> &nbsp; <%= game.developer%></b>
+                    <a href="/games/<%=game._id%>/edit?gameName=<%=game.game_name%>&developer=<%=game.developer%>">edit</a>
+                    <a href="/games/<%=game._id%>/delete?gameName=<%=game.game_name%>&developer=<%=game.developer%>">delete</a>
+                    <a href="/games/<%=game._id%>/replace?gameName=<%=game.game_name%>&developer=<%=game.developer%>">replace</a></br> 
+                    <% }) %>
+            <% } %>
+            </br><label>Add Game:</label></br>
+            <label>Name:
+                <input type="text" id="gameName" name="gameName" value="<%= locals.gameName %>" required>
+            </label>
+            <label>Developer:
+                <input type="text" id="developer" name="developer" value="<%= locals.developer %>" required>
+            </label>
+            </br>
+            <button>POST</button>
+        </form>
+        </div>
+    </body>
+    <%- include('./partials/foot.ejs') %>
+</html>
