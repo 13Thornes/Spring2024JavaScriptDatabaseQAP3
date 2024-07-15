@@ -15,4 +15,19 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/:id', async (req, res) => {
+    try {
+        const aGame = await gamesDal.getGameByGameId(req.params.id); // from postgresql
+        if(DEBUG) console.log(`games.router.get/:id ${aGame}`);
+        if (aGame)
+            res.render('game', {aGame});
+        else
+            res.render('norecord');
+    } catch {
+        res.render('503');
+    }
+});
+
+
+
 module.exports = router

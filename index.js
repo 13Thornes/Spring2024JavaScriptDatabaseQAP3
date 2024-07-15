@@ -13,7 +13,9 @@ app.get('/', (req, res) => {
     res.render('index.ejs');
 });
 
-const gamesRouter = require('./routes/games')
+
+
+const gamesRouter = require('./Routes/games')
 app.use('/games', gamesRouter);
 
 // anything beginning with "/api" will go into this
