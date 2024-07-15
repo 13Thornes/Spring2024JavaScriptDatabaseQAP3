@@ -28,6 +28,14 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.get('/:id/replace', async (req, res) => {
+    if(DEBUG) console.log('game.Replace : ' + req.params.id);
+    res.render('gamePut.ejs', {gameName: req.query.gameName, developer: req.query.developer, theId: req.params.id});
+});
+
+
+
+
 // router.post('/', async (req, res) => {
 //     if(DEBUG) console.log("games.POST");
 //     try {
