@@ -34,8 +34,25 @@ var getGames= function() {
     }); 
   };
 
+//   var addGame = function(gid, gname, developer) {
+//     if(DEBUG) console.log("games.pg.dal.addGame()");
+//     return new Promise(function(resolve, reject) {
+//       const sql = "INSERT INTO public.games(game_id, game_name, developer) \
+//           VALUES ($1, $2, $3);";
+//       dal.query(sql, [gid, gname, developer], (err, result) => {
+//         if (err) {
+//             if(DEBUG) console.log(err);
+//             reject(err);
+//           } else {
+//             resolve(result.rows);
+//           }
+//       }); 
+//     });
+//   };
+
 
   module.exports = {
     getGames,
-    getGameByGameId
+    getGameByGameId,
+    addGame
   }
