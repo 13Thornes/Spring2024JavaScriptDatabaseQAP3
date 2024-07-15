@@ -68,4 +68,19 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+
+
+router.delete('/:id', async (req, res) => {
+    if(DEBUG) console.log('ROUTE: /api/games DELETE ' + req.params.id);
+    try {
+        await gamesDal.deleteGame(req.params.id);
+        res.statusCode = 200;
+        res.json({message: "OK", status: 200});
+    } catch {
+        // log this error to an error log file.
+        res.statusCode = 503;
+        res.json({message: "Service Unavailable", status: 503});
+    }
+});
+
 module.exports = router;
