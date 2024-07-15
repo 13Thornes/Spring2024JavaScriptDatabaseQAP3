@@ -15,8 +15,6 @@ router.get('/', async (req, res) => {
 });
 
 
-
-
 // api/actors/:id
 router.get('/:id', async (req, res) => {
     if(DEBUG) console.log('ROUTE: /api/games/:id GET ' + req.url);
@@ -37,21 +35,21 @@ router.get('/:id', async (req, res) => {
 });
 
 
-// router.post('/', async (req, res) => {
-//     if(DEBUG) { 
-//         console.log('ROUTE: /api/games/ POST');
-//         // console.log(req);
-//     }
-//     try {
-//         await gamesDal.addGame(req.body.game_id ,req.body.game_name, req.body.developer );
-//         res.statusCode = 201;
-//         res.json({message: "Created", status: 201});
-//     } catch {
-//         // log this error to an error log file.
-//         res.statusCode = 503;
-//         res.json({message: "Service Unavailable", status: 503});
-//     } 
-// });
+router.post('/', async (req, res) => {
+    if(DEBUG) { 
+        console.log('ROUTE: /api/games/ POST');
+        // console.log(req);
+    }
+    try {
+        await gamesDal.addGame(req.body.game_id ,req.body.game_name, req.body.developer );
+        res.statusCode = 201;
+        res.json({message: "Created", status: 201});
+    } catch {
+        // log this error to an error log file.
+        res.statusCode = 503;
+        res.json({message: "Service Unavailable", status: 503});
+    } 
+});
 
 
 
@@ -68,6 +66,19 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+
+router.patch('/:id', async (req, res) => {
+    if(DEBUG) console.log('ROUTE: /api/games PATCH ' + req.params.id);
+    try {
+        await gamesDal.patchGame(req.params.id, req.body.gameName, req.body.developer);
+        res.statusCode = 200;
+        res.json({message: "OK", status: 200});
+    } catch {
+        // log this error to an error log file.
+        res.statusCode = 503;
+        res.json({message: "Service Unavailable", status: 503});
+    }
+});
 
 
 router.delete('/:id', async (req, res) => {

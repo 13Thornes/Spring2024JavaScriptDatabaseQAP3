@@ -44,16 +44,16 @@ router.get('/:id/delete', async (req, res) => {
 });
 
 
-// router.post('/', async (req, res) => {
-//     if(DEBUG) console.log("games.POST");
-//     try {
-//         await gamesDal.addGame(req.body.game_id, req.body.game_name, req.body.developer );
-//         res.redirect('/games/');
-//     } catch {
-//         // log this error to an error log file.
-//         res.render('503');
-//     } 
-// });
+router.post('/', async (req, res) => {
+    if(DEBUG) console.log("games.POST");
+    try {
+        await gamesDal.addGame(req.body.game_id, req.body.game_name, req.body.developer );
+        res.redirect('/games/');
+    } catch {
+        // log this error to an error log file.
+        res.render('503');
+    } 
+});
 
 router.put('/:id', async (req, res) => {
     if(DEBUG) console.log('games.PUT: ' + req.params.id);
@@ -65,6 +65,20 @@ router.put('/:id', async (req, res) => {
         res.render('503');
     }
 });
+
+
+router.patch('/:id', async (req, res) => {
+    if(DEBUG) console.log('games.PATCH: ' + req.params.id);
+    try {
+        await gamesDal.patchGame(req.params.id, req.body.gameName, req.body.developer);
+        res.redirect('/games/');
+    } catch {
+        // log this error to an error log file.
+        res.render('503');
+    }
+});
+
+
 
 router.delete('/:id', async (req, res) => {
     if(DEBUG) console.log('gamess.DELETE: ' + req.params.id);
