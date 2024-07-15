@@ -50,6 +50,18 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+router.delete('/:id', async (req, res) => {
+    if(DEBUG) console.log('gamess.DELETE: ' + req.params.id);
+    try {
+        await gamesDal.deleteGame(req.params.id);
+        res.redirect('/games/');
+    } catch (err) {
+        if(DEBUG) console.error(err);
+        // log this error to an error log file.
+        res.render('503');
+    }
+});
+
 
 
 

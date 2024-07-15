@@ -66,9 +66,26 @@ var putGame = function(id, gname, developer) {
   };
 
 
+  var deleteGame = function(id) {
+    if(DEBUG) console.log("gamess.pg.dal.deleteGame()");
+    return new Promise(function(resolve, reject) {
+      const sql = "DELETE FROM public.games WHERE game_id = $1;";
+      dal.query(sql, [id], (err, result) => {
+        if (err) {
+            reject(err);
+          } else {
+            resolve(result.rows);
+          }
+      }); 
+    });
+  };
+  
+
+
   module.exports = {
     getGames,
     getGameByGameId,
     // addGame,
-    putGame
+    putGame,
+    deleteGame
   }
