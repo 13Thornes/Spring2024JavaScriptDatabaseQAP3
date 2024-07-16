@@ -34,29 +34,13 @@ var getGames= function() {
     }); 
   };
 
-//   var addGame = function(gid, gname, developer) {
-//     if(DEBUG) console.log("games.pg.dal.addGame()");
-//     return new Promise(function(resolve, reject) {
-//       const sql = "INSERT INTO public.games(game_id, game_name, developer) \
-//           VALUES ($1, $2, $3);";
-//       dal.query(sql, [gid, gname, developer], (err, result) => {
-//         if (err) {
-//             if(DEBUG) console.log(err);
-//             reject(err);
-//           } else {
-//             resolve(result.rows);
-//           }
-//       }); 
-//     });
-//   };
-
-
-var putGame = function(id, gname, developer) {
-    if(DEBUG) console.log("games.pg.dal.putGame()");
+  var addGame = function(game_id, game_name, developer, release_date, genre) {
+    if(DEBUG) console.log("games.pg.dal.addGame()");
     return new Promise(function(resolve, reject) {
-      const sql = "UPDATE public.game SET game_name=$2, developer=$3 WHERE actor_id=$1;";
-      dal.query(sql, [id, gname, developer], (err, result) => {
+      const sql = "INSERT INTO public.games(game_id, game_name, developer, release_date, genre) VALUES ($1, $2, $3, $4, $5);"
+      dal.query(sql, [game_id, game_name, developer, release_date, genre], (err, result) => {
         if (err) {
+            if(DEBUG) console.log(err);
             reject(err);
           } else {
             resolve(result.rows);
@@ -66,15 +50,35 @@ var putGame = function(id, gname, developer) {
   };
 
 
-  var patchGame = function(id, gname, developer) {
+var putGame = function(game_id, game_name, developer) {
+    if(DEBUG) console.log("games.pg.dal.putGame()");
+    return new Promise(function(resolve, reject) {
+      const sql = "UPDATE public.games SET game_name=$2, developer=$3 WHERE game_id=$1;";
+      dal.query(sql, [game_id, game_name, developer], (err, result) => {
+        if (err) {
+            reject(err);
+            console.log("Rejected")
+          } else {
+            console.log("Accepted")
+            resolve(result.rows);
+          }
+      }); 
+    });
+  };
+
+
+  var patchGame = function(game_id, game_name, developer) {
     if(DEBUG) console.log("games.pg.dal.patchGame()");
     return new Promise(function(resolve, reject) {
-      const sql = "UPDATE public.game SET game_name=$2, developer=$3 WHERE game_id=$1;";
-      dal.query(sql, [id, gname, developer], (err, result) => {
+      const sql = "UPDATE public.games SET game_name=$2, developer=$3 WHERE game_id=$1;"
+      dal.query(sql, [game_id, game_name, developer], (err, result) => {
         if (err) {
+            console.log("Rejected")
             reject(err);
           } else {
             resolve(result.rows);
+            console.table(result);
+            console.log("results have been resolved")
           }
       }); 
     });
@@ -100,7 +104,7 @@ var putGame = function(id, gname, developer) {
   module.exports = {
     getGames,
     getGameByGameId,
-    // addGame,
+    addGame,
     putGame,
     deleteGame,
     patchGame
