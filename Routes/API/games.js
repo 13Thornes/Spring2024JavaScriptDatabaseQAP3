@@ -41,7 +41,7 @@ router.post('/', async (req, res) => {
         // console.log(req);
     }
     try {
-        await gamesDal.addGame(req.body.game_id ,req.body.game_name, req.body.developer );
+        await gamesDal.addGame(req.body.game_id ,req.body.game_name, req.body.developer, req.body.release_date, req.body.genre);
         res.statusCode = 201;
         res.json({message: "Created", status: 201});
     } catch {
@@ -54,9 +54,9 @@ router.post('/', async (req, res) => {
 
 
 router.put('/:id', async (req, res) => {
-    if(DEBUG) console.log('ROUTE: /api/gamess PUT ' + req.params.id);
+    if(DEBUG) console.log('ROUTE: /api/games PUT ' + req.params.id);
     try {
-        await actorsDal.putGame(req.params.id, req.body.gameName, req.body.developer);
+        await gamesDal.putGame(req.params.id, req.body.gameName, req.body.developer);
         res.statusCode = 200;
         res.json({message: "OK", status: 200});
     } catch {

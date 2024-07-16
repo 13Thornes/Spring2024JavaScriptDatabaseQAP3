@@ -4,8 +4,8 @@
         <%- include('./partials/nav.ejs') %>
         <div class="create content">
             <form action="/games/<%= locals.theId %>?_method=PATCH" method="POST">
-                <label>Edit Actor Names:</br>
-                    <input type="text" name="gameName" value="<%= locals.gameName %>" required>
+                <label>Edit Game Information:</br>
+                    <input type="text" name="gameName" value="<%= locals.game_name %>" required>
                     <input type="text" name="developer" value="<%= locals.developer %>" required>
                 </label></br>
                 <button>PATCH</button>
