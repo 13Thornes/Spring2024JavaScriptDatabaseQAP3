@@ -1,4 +1,4 @@
-const dal = require("./SQL/videogames_db");
+const dal = require("./videogames_db");
 
 // GET all games
 var getGames= function() {
