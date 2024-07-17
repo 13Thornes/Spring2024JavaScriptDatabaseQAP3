@@ -13,7 +13,9 @@ app.get('/', (req, res) => {
     res.render('index.ejs');
 });
 
-
+app.get('/about', (request, response) => {
+    response.render('about.ejs');
+});
 
 const gamesRouter = require('./Routes/games')
 app.use('/games', gamesRouter);
