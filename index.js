@@ -13,6 +13,10 @@ app.get('/', (req, res) => {
     res.render('index.ejs');
 });
 
+const loginsRouter = require('./Routes/logins')
+app.use('/logins', loginsRouter);
+
+
 app.get('/about', (request, response) => {
     response.render('about.ejs');
 });
