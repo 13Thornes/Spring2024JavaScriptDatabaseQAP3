@@ -1,13 +1,14 @@
+
+// set constants
 const dal = require("./videogames_db");
 
 // GET all games
 var getGames= function() {
     if(DEBUG) console.log("games.pg.dal.getGames()");
     return new Promise(function(resolve, reject) {
-      const sql = "SELECT game_id, game_name, developer FROM games;"
+      const sql = "SELECT game_id, game_name, developer FROM games ORDER BY game_id;"
       dal.query(sql, [], (err, result) => {
         if (err) {
-          // logging should go here
           if(DEBUG) console.log(err);
           reject(err);
         } else {
@@ -24,7 +25,6 @@ var getGames= function() {
       const sql = "SELECT game_name, developer FROM games WHERE game_id = $1";
       dal.query(sql, [id], (err, result) => {
         if (err) {
-          // logging should go here
           if(DEBUG) console.log(err);
           reject(err);
         } else {
@@ -34,6 +34,7 @@ var getGames= function() {
     }); 
   };
 
+  // Add a game to the database
   var addGame = function(game_id, game_name, developer, release_date, genre) {
     if(DEBUG) console.log("games.pg.dal.addGame()");
     return new Promise(function(resolve, reject) {
@@ -50,6 +51,7 @@ var getGames= function() {
   };
 
 
+// replace a game in the database
 var putGame = function(game_id, game_name, developer) {
     if(DEBUG) console.log("games.pg.dal.putGame()");
     return new Promise(function(resolve, reject) {
@@ -66,7 +68,7 @@ var putGame = function(game_id, game_name, developer) {
     });
   };
 
-
+// update a game in the database
   var patchGame = function(game_id, game_name, developer) {
     if(DEBUG) console.log("games.pg.dal.patchGame()");
     return new Promise(function(resolve, reject) {
@@ -84,7 +86,7 @@ var putGame = function(game_id, game_name, developer) {
     });
   };
 
-
+// delete a game from the database
   var deleteGame = function(id) {
     if(DEBUG) console.log("gamess.pg.dal.deleteGame()");
     return new Promise(function(resolve, reject) {
@@ -100,7 +102,7 @@ var putGame = function(game_id, game_name, developer) {
   };
   
 
-
+// export modules
   module.exports = {
     getGames,
     getGameByGameId,
