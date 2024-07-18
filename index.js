@@ -13,9 +13,6 @@ app.get('/', (req, res) => {
     res.render('index.ejs');
 });
 
-const loginsRouter = require('./Routes/logins')
-app.use('/logins', loginsRouter);
-
 
 app.get('/about', (request, response) => {
     response.render('about.ejs');
@@ -23,13 +20,6 @@ app.get('/about', (request, response) => {
 
 const gamesRouter = require('./Routes/games')
 app.use('/games', gamesRouter);
-
-const usersRouter = require('./Routes/users')
-app.use('/users', usersRouter);
-
-// anything beginning with "/api" will go into this
-// const apiRouter = require('./routes/api')
-// app.use('/api', apiRouter);
 
 app.use((req, res) => {
     res.status(404).render('404');
