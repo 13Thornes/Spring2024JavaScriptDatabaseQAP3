@@ -1,0 +1,1 @@
+UPDATE public.games SET game_name='Minecraft', developer='Mojang' WHERE game_id=1;
