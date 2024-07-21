@@ -4,6 +4,7 @@ const express = require('express');
 const methodOverride = require('method-override');
 const app = express();
 const PORT = 3000;
+const path = require('path');
 
 // Debug, set and use statements
 global.DEBUG = true;
@@ -32,6 +33,9 @@ app.use('/games', gamesRouter);
 app.use((req, res) => {
     res.status(404).render('404');
 });
+
+// link to css
+app.use(express.static(path.join(__dirname, 'public')))
 
 // run the server
 app.listen(PORT, () => {
