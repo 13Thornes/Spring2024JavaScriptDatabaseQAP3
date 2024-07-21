@@ -2,18 +2,19 @@
     <%- include('./partials/head.ejs') %>
     <body>
         <%- include('./partials/nav.ejs') %>
-        <div class="games content">
+        <div class="gameContent">
             <form action="/games" method="POST">
-                <b>Games: </b></br> 
+                <h2>Games: </h2>
             <% if (theGames.length > 0) { %>
                 <% theGames.forEach(game => { %>
-                    <b><%= game.game_name %> &nbsp; <%= game.developer%></b>
-                    <a href="/games/<%=game.game_id%>/edit?gameName=<%=game.gameName%>&developer=<%=game.developer%>">edit</a>
-                    <a href="/games/<%=game.game_id%>/delete?gameName=<%=game.game_name%>&developer=<%=game.developer%>">delete</a>
-                    <a href="/games/<%=game.game_id%>/replace?gameName=<%=game.game_name%>&developer=<%=game.developer%>">replace</a></br> 
+                    <div class="gameSection">
+                    <b class="gameInfo"><%= game.game_name %> &nbsp; <%= game.developer%></b>
+                    <a class="actionLink" href="/games/<%=game.game_id%>/edit?gameName=<%=game.gameName%>&developer=<%=game.developer%>">edit</a>
+                    <a class="actionLink" href="/games/<%=game.game_id%>/delete?gameName=<%=game.game_name%>&developer=<%=game.developer%>">delete</a>
+                    <a class="actionLink" href="/games/<%=game.game_id%>/replace?gameName=<%=game.game_name%>&developer=<%=game.developer%>">replace</a></br> </div>
                     <% }) %>
             <% } %>
-            </br><label>Add Game:</label></br>
+            </br><label>Add Game:</label></br><br>
             <label>ID:
                 <input type="number" id="game_id" name="game_id" value="<%= locals.game_id %>" required>
             </label>
@@ -29,8 +30,7 @@
             <label>Genre:
                 <input type="text" id="genre" name="genre" value="<%= locals.genre %>" required>
             </label>
-            </br>
-            <button>POST</button>
+            <button class="postBtn">POST</button>
         </form>
         </div>
     </body>

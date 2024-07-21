@@ -41,7 +41,7 @@ router.get('/:id/replace', async (req, res) => {
 // router call to render the edit page
 router.get('/:id/edit', async (req, res) => {
     if(DEBUG) console.log('game.Edit : ' + req.params.id);
-    res.render('gamePatch.ejs', {gameName: req.query.game_name, developer: req.query.developer, theId: req.params.id});
+    res.render('gamePatch.ejs', {gameName: req.query.game_name, developer: req.query.developer, theId: req.params.id, });
 });
 
 // router call to render the delete page
